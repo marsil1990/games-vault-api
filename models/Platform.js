@@ -6,7 +6,7 @@ const platformSchema = new mongoose.Schema({
   releaseYear: { type: Number },
   type: { type: String },
   country: { type: String, required: true },
-  foundedYear: { type: Number, require: true },
+  foundedYear: { type: Number, required: true },
   website: { type: String },
 });
 

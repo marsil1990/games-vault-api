@@ -25,8 +25,17 @@ app.use(
       }
     },
     credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+      allowedHeaders: [
+        "Content-Type",
+        "Authorization",
+        "Accept",
+        "Origin",
+        "Cookie",
+        "connect.sid",
+        "X-Requested-With"
+      ],
+      exposedHeaders: ["Set-Cookie", "set-cookie"],
   })
 );
 

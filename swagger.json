@@ -5,10 +5,10 @@
     "description": "This API allow us to get, create, update and delete Games, genrer, plataform and others",
     "version": "1.0.0"
   },
-  "host": "games-vault-api-x81d.onrender.com",
+  "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "securityDefinitions": {
     "cookieAuth": {
@@ -16,6 +16,54 @@
       "in": "cookie",
       "name": "connect.sid",
       "description": "Session cookie set after login in via /login (Google OAuth)."
+    }
+  },
+  "definitions": {
+    "Genre": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" }
+      }
+    },
+    "Studio": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string" },
+        "foundedYear": { "type": "integer" },
+        "country": { "type": "string" },
+        "website": { "type": "string" },
+        "description": { "type": "string" }
+      }
+    },
+    "Platform": {
+      "type": "object",
+      "required": ["name", "manufacturer", "country", "foundedYear"],
+      "properties": {
+        "name": { "type": "string" },
+        "manufacturer": { "type": "string" },
+        "releaseYear": { "type": "integer" },
+        "type": { "type": "string" },
+        "country": { "type": "string" },
+        "foundedYear": { "type": "integer" },
+        "website": { "type": "string" }
+      }
+    },
+    "Game": {
+      "type": "object",
+      "required": ["title"],
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "releaseYear": { "type": "integer" },
+        "genre": { "type": "array", "items": { "type": "string" } },
+        "platforms": { "type": "array", "items": { "type": "string" } },
+        "studio": { "type": "string" },
+        "multiplayer": { "type": "boolean" },
+        "language": { "type": "string" }
+      }
     }
   },
   "paths": {
@@ -83,6 +131,15 @@
       },
       "post": {
         "description": "",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Game object to create",
+            "required": true,
+            "schema": { "$ref": "#/definitions/Game" }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -138,6 +195,13 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Game fields to update",
+            "required": true,
+            "schema": { "$ref": "#/definitions/Game" }
           }
         ],
         "responses": {
@@ -211,6 +275,15 @@
       },
       "post": {
         "description": "",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Studio object to create",
+            "required": true,
+            "schema": { "$ref": "#/definitions/Studio" }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -266,6 +339,13 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Studio fields to update",
+            "required": true,
+            "schema": { "$ref": "#/definitions/Studio" }
           }
         ],
         "responses": {
@@ -339,6 +419,15 @@
       },
       "post": {
         "description": "",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Genre object to create",
+            "required": true,
+            "schema": { "$ref": "#/definitions/Genre" }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -394,6 +483,13 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Genre fields to update",
+            "required": true,
+            "schema": { "$ref": "#/definitions/Genre" }
           }
         ],
         "responses": {
