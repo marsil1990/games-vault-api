@@ -5,7 +5,7 @@
     "description": "This API allow us to get, create, update and delete Games, genrer, plataform and others",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": "games-vault-api-x81d.onrender.com",
   "basePath": "/",
   "schemes": [
     "http",
@@ -83,17 +83,7 @@
         }
       },
       "post": {
-        "description": "Create a new game",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GameInput"
-            }
-          }
-        ],
+        "description": "",
         "responses": {
           "201": {
             "description": "Created"
@@ -142,21 +132,13 @@
         }
       },
       "put": {
-        "description": "Update a game",
+        "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GameInput"
-            }
           }
         ],
         "responses": {
@@ -278,21 +260,13 @@
         }
       },
       "put": {
-        "description": "Update a studio",
+        "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/StudioInput"
-            }
           }
         ],
         "responses": {
@@ -365,17 +339,7 @@
         }
       },
       "post": {
-        "description": "Create a new genre",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GenreInput"
-            }
-          }
-        ],
+        "description": "",
         "responses": {
           "201": {
             "description": "Created"
@@ -424,21 +388,13 @@
         }
       },
       "put": {
-        "description": "Update a genre",
+        "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GenreInput"
-            }
           }
         ],
         "responses": {
@@ -497,88 +453,6 @@
           }
         ]
       }
-    }
-  },
-  "definitions": {
-    "GameInput": {
-      "type": "object",
-      "properties": {
-        "title": {
-          "type": "string",
-          "example": "The Legend of Zelda"
-        },
-        "releaseYear": {
-          "type": "integer",
-          "example": 1986
-        },
-        "multiplayer": {
-          "type": "boolean",
-          "example": false
-        },
-        "genre": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "example": ["507f1f77bcf86cd799439011"]
-        },
-        "platforms": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "example": ["507f1f77bcf86cd799439011"]
-        },
-        "studio": {
-          "type": "string",
-          "example": "507f1f77bcf86cd799439011"
-        },
-        "description": {
-          "type": "string",
-          "example": "An epic adventure game"
-        }
-      },
-      "required": ["title"]
-    },
-    "GenreInput": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "example": "Adventure"
-        },
-        "description": {
-          "type": "string",
-          "example": "Story-driven games with exploration and puzzles"
-        }
-      },
-      "required": ["name"]
-    },
-    "StudioInput": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "example": "Nintendo"
-        },
-        "foundedYear": {
-          "type": "integer",
-          "example": 1889
-        },
-        "country": {
-          "type": "string",
-          "example": "Japan"
-        },
-        "website": {
-          "type": "string",
-          "example": "https://www.nintendo.com"
-        },
-        "description": {
-          "type": "string",
-          "example": "A leading video game company"
-        }
-      },
-      "required": ["name"]
     }
   }
 }
