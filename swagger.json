@@ -1,11 +1,11 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Games Vault API",
-    "description": "This API allows you to create, read, update and delete video games and studios.",
+    "title": "API - Contacts ",
+    "description": "This API allow us to get, create, update and delete Games, genrer, plataform and others",
     "version": "1.0.0"
   },
-  "host": "games-vault-api-x81d.onrender.com",
+  "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
     "http",
@@ -16,13 +16,13 @@
       "type": "apiKey",
       "in": "cookie",
       "name": "connect.sid",
-      "description": "Session cookie set after login via /login (Google OAuth)."
+      "description": "Session cookie set after login in via /login (Google OAuth)."
     }
   },
   "paths": {
     "/": {
       "get": {
-        "description": "Health check for Games Vault API",
+        "description": "",
         "responses": {
           "200": {
             "description": "OK"
@@ -30,10 +30,49 @@
         }
       }
     },
-
+    "/login": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/google/callback": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/logout": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api-docs": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/games/": {
       "get": {
-        "description": "Get all games",
+        "description": "",
         "responses": {
           "200": {
             "description": "OK"
@@ -45,18 +84,13 @@
       },
       "post": {
         "description": "Create a new game",
-        "security": [
-          {
-            "cookieAuth": []
-          }
-        ],
         "parameters": [
           {
+            "name": "body",
             "in": "body",
-            "name": "game",
             "required": true,
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/GameInput"
             }
           }
         ],
@@ -67,16 +101,23 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ]
       }
     },
-
     "/games/{id}": {
       "get": {
-        "description": "Get a single game by id",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -101,12 +142,7 @@
         }
       },
       "put": {
-        "description": "Update a game by id",
-        "security": [
-          {
-            "cookieAuth": []
-          }
-        ],
+        "description": "Update a game",
         "parameters": [
           {
             "name": "id",
@@ -115,11 +151,11 @@
             "type": "string"
           },
           {
+            "name": "body",
             "in": "body",
-            "name": "game",
             "required": true,
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/GameInput"
             }
           }
         ],
@@ -130,21 +166,24 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
             "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
           }
-        }
-      },
-      "delete": {
-        "description": "Delete a game by id",
+        },
         "security": [
           {
             "cookieAuth": []
           }
-        ],
+        ]
+      },
+      "delete": {
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -155,10 +194,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Deleted"
+            "description": "OK"
           },
           "400": {
             "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "404": {
             "description": "Not Found"
@@ -166,13 +208,17 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ]
       }
     },
-
     "/studios/": {
       "get": {
-        "description": "Get all studios",
+        "description": "",
         "responses": {
           "200": {
             "description": "OK"
@@ -183,22 +229,7 @@
         }
       },
       "post": {
-        "description": "Create a new studio",
-        "security": [
-          {
-            "cookieAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "studio",
-            "required": true,
-            "schema": {
-              "type": "object"
-            }
-          }
-        ],
+        "description": "",
         "responses": {
           "201": {
             "description": "Created"
@@ -206,16 +237,23 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ]
       }
     },
-
     "/studios/{id}": {
       "get": {
-        "description": "Get a single studio by id",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -240,12 +278,7 @@
         }
       },
       "put": {
-        "description": "Update a studio by id",
-        "security": [
-          {
-            "cookieAuth": []
-          }
-        ],
+        "description": "Update a studio",
         "parameters": [
           {
             "name": "id",
@@ -254,12 +287,125 @@
             "type": "string"
           },
           {
+            "name": "body",
             "in": "body",
-            "name": "studio",
             "required": true,
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/StudioInput"
             }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ]
+      }
+    },
+    "/genres/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "description": "Create a new genre",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenreInput"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ]
+      }
+    },
+    "/genres/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -277,13 +423,49 @@
           }
         }
       },
-      "delete": {
-        "description": "Delete a studio by id",
+      "put": {
+        "description": "Update a genre",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenreInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
         "security": [
           {
             "cookieAuth": []
           }
-        ],
+        ]
+      },
+      "delete": {
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -294,10 +476,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Deleted"
+            "description": "OK"
           },
           "400": {
             "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "404": {
             "description": "Not Found"
@@ -305,8 +490,95 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ]
       }
+    }
+  },
+  "definitions": {
+    "GameInput": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "The Legend of Zelda"
+        },
+        "releaseYear": {
+          "type": "integer",
+          "example": 1986
+        },
+        "multiplayer": {
+          "type": "boolean",
+          "example": false
+        },
+        "genre": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "example": ["507f1f77bcf86cd799439011"]
+        },
+        "platforms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "example": ["507f1f77bcf86cd799439011"]
+        },
+        "studio": {
+          "type": "string",
+          "example": "507f1f77bcf86cd799439011"
+        },
+        "description": {
+          "type": "string",
+          "example": "An epic adventure game"
+        }
+      },
+      "required": ["title"]
+    },
+    "GenreInput": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Adventure"
+        },
+        "description": {
+          "type": "string",
+          "example": "Story-driven games with exploration and puzzles"
+        }
+      },
+      "required": ["name"]
+    },
+    "StudioInput": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Nintendo"
+        },
+        "foundedYear": {
+          "type": "integer",
+          "example": 1889
+        },
+        "country": {
+          "type": "string",
+          "example": "Japan"
+        },
+        "website": {
+          "type": "string",
+          "example": "https://www.nintendo.com"
+        },
+        "description": {
+          "type": "string",
+          "example": "A leading video game company"
+        }
+      },
+      "required": ["name"]
     }
   }
 }
