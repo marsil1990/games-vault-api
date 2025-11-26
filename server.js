@@ -10,12 +10,14 @@ const User = require("./models/User");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 
-app.use(cors({
-  origin: "*",
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"]
-}));
+app.use(
+  cors({
+    origin: "*",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -40,9 +42,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Determina a URL de callback baseada no ambiente
-const callbackURL = process.env.NODE_ENV === "production" 
-  ? process.env.GOOGLE_CALLBACK_URL_PROD 
-  : process.env.GOOGLE_CALLBACK_URL_LOCAL;
+const callbackURL =
+  process.env.NODE_ENV === "production"
+    ? process.env.GOOGLE_CALLBACK_URL_PROD
+    : process.env.GOOGLE_CALLBACK_URL;
 
 passport.use(
   new GoogleStrategy(
