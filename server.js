@@ -10,14 +10,30 @@ const User = require("./models/User");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://games-vault-api-x81d.onrender.com"
+];
+
 app.use(
   cors({
-    origin: "*",
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Origin not allowed by CORS"));
+      }
+    },
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+
+app.get("/cors-test", (req, res) => {
+  res.json({ message: "CORS OK" });
+});
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
