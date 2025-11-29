@@ -4,6 +4,7 @@ const { Types } = mongoose;
 
 // GET /studios
 const getAll = async (req, res) => {
+    //#swagger.tags = ['Studios']
   try {
     const studios = await Studio.find().lean();
     return res.status(200).json(studios); // 200
@@ -16,6 +17,7 @@ const getAll = async (req, res) => {
 
 // GET /studios/:id
 const getSingle = async (req, res) => {
+  //#swagger.tags = ['Studios']
   try {
     const { id } = req.params;
 
@@ -39,6 +41,7 @@ const getSingle = async (req, res) => {
 
 // POST /studios
 const create = async (req, res) => {
+  //#swagger.tags = ['Studios']
   try {
     const studio = new Studio(req.body);
     const saved = await studio.save();
@@ -52,6 +55,7 @@ const create = async (req, res) => {
 
 // PUT /studios/:id
 const updateByid = async (req, res) => {
+  //#swagger.tags = ['Studios']
   try {
     const { id } = req.params;
 
@@ -78,6 +82,7 @@ const updateByid = async (req, res) => {
 
 // DELETE /studios/:id
 const deleteByid = async (req, res) => {
+  //#swagger.tags = ['Studios']
   try {
     const { id } = req.params;
 

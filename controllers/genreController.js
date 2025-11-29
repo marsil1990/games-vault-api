@@ -4,6 +4,7 @@ const { Types } = require("mongoose");
 
 // GET /genres
 const getAll = async (req, res) => {
+  //#swagger.tags = ['Genres']
   try {
     const genres = await Genre.find().lean();
     return res.status(200).json(genres); // 200 OK
@@ -16,6 +17,7 @@ const getAll = async (req, res) => {
 
 // GET /genres/:id
 const getSingle = async (req, res) => {
+  //#swagger.tags = ['Genres']
   try {
     const { id } = req.params;
 
@@ -39,6 +41,7 @@ const getSingle = async (req, res) => {
 
 // POST /genres
 const create = async (req, res) => {
+  //#swagger.tags = ['Genres']
   try {
     const genre = new Genre(req.body);
     const saved = await genre.save();
@@ -52,6 +55,7 @@ const create = async (req, res) => {
 
 // PUT /genres/:id
 const updateByid = async (req, res) => {
+  //#swagger.tags = ['Genres']
   try {
     const { id } = req.params;
 
@@ -78,6 +82,7 @@ const updateByid = async (req, res) => {
 
 // DELETE /genres/:id
 const deleteByid = async (req, res) => {
+  //#swagger.tags = ['Genres']
   try {
     const { id } = req.params;
 
