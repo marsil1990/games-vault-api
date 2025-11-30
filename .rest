@@ -1,0 +1,169 @@
+// HOSTNAME
+@hostname = https://games-vault-api-x81d.onrender.com/
+
+## 🎮 Collection GAMES
+
+### GET all games
+GET {{hostname}}/games
+Accept: application/json
+
+### GET a game by id (Cyber Strike)
+GET {{hostname}}/games/674000000000000000000032
+Accept: application/json
+
+---
+
+### POST a valid data for a new game
+POST {{hostname}}/games
+Accept: application/json
+Content-Type: application/json
+
+{
+ "title": "Fallout 4",
+ "description": "The Commonwealth awaits. Explore a post-apocalyptic Boston and make choices that shape the fate of the Wasteland.",
+ "releaseYear": 2015,
+ "genre": [
+  "674000000000000000000003",
+  "674000000000000000000001"
+ ],
+ "platforms": [
+  "674000000000000000000011",
+  "674000000000000000000015",
+  "674000000000000000000016"
+ ],
+ "studio": "674000000000000000000024",
+ "multiplayer": false,
+ "language": "English"
+}
+
+---
+
+### PUT a valid data for an existing game( DOOM data update)
+PUT {{hostname}}/games/692b9e81ccb796eeae7dc925
+Accept: application/json
+Content-Type: application/json
+
+{
+ "title": "DOOM: The Dark Ages",
+ "description": "An epic prequel to the critically acclaimed DOOM (2016) and DOOM Eternal. Take on the role of the DOOM Slayer, the gods' Super Agent warrior, and unleash mechanized medieval fury to fight hordes of demons in a dark, mythical world.",
+ "releaseYear": 2025,
+ "genre": [
+  "674000000000000000000005", 
+  "674000000000000000000001"
+ ],
+ "platforms": [
+  "674000000000000000000011",
+  "674000000000000000000012",
+  "674000000000000000000013"
+ ],
+ "studio": "674000000000000000000025",
+ "multiplayer": false,
+ "language": "Multiple (including English)"
+}
+
+---
+
+### DELETE a fake game (ZzZ)
+DELETE {{hostname}}/games/692b9de3ccb796eeae7dc920
+Accept: application/json
+
+---
+
+### POST a invalid data for a new game
+POST {{hostname}}/games
+Accept: application/json
+Content-Type: application/json
+
+{
+  "title": "Anomalous Rift (Error Test)",
+  "description": "This POST should fail due to invalid ObjectIds in references.",
+  "releaseYear": 2027,
+  "genre": ["Invalid Genre Name"],
+  "platforms": ["Invalid Platform Name"],
+  "studio": "Invalid Studio Name",
+  "multiplayer": false,
+  "language": "English (UK)"
+}
+
+---
+---
+
+## 🏛️ Collection STUDIOS
+
+### GET all studios
+GET {{hostname}}/studios
+Accept: application/json
+
+### POST a new studio (Bethesda Game Studio)
+POST {{hostname}}/studios
+Accept: application/json
+Content-Type: application/json
+
+{
+  "_id": "674000000000000000000024",
+  "name": "Bethesda Game Studios",
+  "foundedYear": 2001,
+  "country": "United States",
+  "website": "https://bethesdagamestudios.com/",
+  "description": "The primary development studio responsible for core franchises like The Elder Scrolls and Fallout."
+}
+
+### POST another studio (id Software)
+POST {{hostname}}/studios
+Accept: application/json
+Content-Type: application/json
+
+{
+  "_id": "674000000000000000000025",
+  "name": "id Software",
+  "foundedYear": 1992,
+  "country": "United States",
+  "website": "https://www.idsoftware.com/",
+  "description": "Pioneer of the first-person shooter genre, known for franchises like DOOM and Quake."
+}
+
+---
+---
+
+## 🏷️ Collection GENRES
+
+### GET all genres
+GET {{hostname}}/genres
+Accept: application/json
+
+### POST: Insertar First-Person Shooter (FPS)
+# Demuestra la inserción de un nuevo género.
+POST {{hostname}}/genres
+Accept: application/json
+Content-Type: application/json
+
+{
+  "_id": "674000000000000000000005",
+  "name": "First-Person Shooter (FPS)",
+  "description": "Action games experienced through the protagonist's eyes, focused on gun combat."
+}
+
+---
+---
+
+## 🎮 Collection PLATFORMS
+
+### GET all platforms
+GET {{hostname}}/platforms
+Accept: application/json
+
+### POST a new platform (PlayStation 4)
+POST {{hostname}}/platforms
+Accept: application/json
+Content-Type: application/json
+
+{
+  "_id": "674000000000000000000015",
+  "name": "PlayStation 4",
+  "manufacturer": "Sony",
+  "releaseYear": 2013,
+  "type": "Console",
+  "country": "Japan",
+  "foundedYear": 1946,
+  "website": "https://www.playstation.com"
+}
