@@ -19,7 +19,7 @@ const studioId = "674000000000000000000022";
 
 //before all test
 
-beforeAll(() => {
+beforeEach(() => {
   mockingoose.resetAll(); //reset before each test
 });
 
@@ -214,7 +214,7 @@ describe("PLATFORMS GET endpoints (mockingoose)", () => {
 // STUDIOS
 
 describe("STUDIOS GET endpoints (mockingoose)", () => {
-  it("GET /studios should return 200 and an array", async () => {
+  test("GET /studios should return 200 and an array", async () => {
     const mockStudios = [
       {
         _id: studioId,
@@ -232,7 +232,7 @@ describe("STUDIOS GET endpoints (mockingoose)", () => {
     expect(res.body[0]).toHaveProperty("name", "Mock Studio");
   });
 
-  tets("GET /studios/:id should return 200 when id exists", async () => {
+  test("GET /studios/:id should return 200 when id exists", async () => {
     const mockStudio = {
       _id: studioId,
       name: "Mock Studio",

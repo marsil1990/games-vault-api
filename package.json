@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test jest",
+    "test": "cross-env NODE_ENV=test jest --detectOpenHandles --forceExit",
     "start": "nodemon server.js",
     "start-prod": "node server.js"
   },
@@ -33,6 +33,7 @@
     "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
+    "cross-env": "^10.1.0",
     "jest": "^30.2.0",
     "mockingoose": "^2.16.2",
     "nodemon": "^3.1.11",
