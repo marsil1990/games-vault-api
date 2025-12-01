@@ -12,7 +12,7 @@ const MongoStore = require("connect-mongo");
 
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://games-vault-api-x81d.onrender.com"
+  "https://games-vault-api-x81d.onrender.com",
 ];
 
 app.use(
@@ -25,17 +25,17 @@ app.use(
       }
     },
     credentials: true,
-      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-      allowedHeaders: [
-        "Content-Type",
-        "Authorization",
-        "Accept",
-        "Origin",
-        "Cookie",
-        "connect.sid",
-        "X-Requested-With"
-      ],
-      exposedHeaders: ["Set-Cookie", "set-cookie"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization",
+      "Accept",
+      "Origin",
+      "Cookie",
+      "connect.sid",
+      "X-Requested-With",
+    ],
+    exposedHeaders: ["Set-Cookie", "set-cookie"],
   })
 );
 
@@ -126,16 +126,20 @@ process.on("uncaughtExceptiob", (err, origib) => {
   );
 });
 
-mongoose
-  .connect(process.env.MONGODB_URL)
-  .then(() => {
-    app.listen(process.env.PORT || 3000, () => {
-      console.log(
-        "Database is listening and node Running at port " +
-          (process.env.PORT || 3000)
-      );
+if (process.env.MONGODB_URL !== "test") {
+  mongoose
+    .connect(process.env.MONGODB_URL)
+    .then(() => {
+      app.listen(process.env.PORT || 3000, () => {
+        console.log(
+          "Database is listening and node Running at port " +
+            (process.env.PORT || 3000)
+        );
+      });
+    })
+    .catch((err) => {
+      console.log("Error conecting Mongoose", err);
     });
-  })
-  .catch((err) => {
-    console.log("Error conecting Mongoose", err);
-  });
+}
+
+module.exports = app;

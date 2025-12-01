@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "NODE_ENV=test jest",
     "start": "nodemon server.js",
     "start-prod": "node server.js"
   },
@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "jest": "^30.2.0",
+    "mockingoose": "^2.16.2",
     "nodemon": "^3.1.11",
     "supertest": "^7.1.4"
   }
