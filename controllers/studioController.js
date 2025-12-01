@@ -4,7 +4,7 @@ const { Types } = mongoose;
 
 // GET /studios
 const getAll = async (req, res) => {
-    //#swagger.tags = ['Studios']
+  //#swagger.tags = ['Studios']
   try {
     const studios = await Studio.find().lean();
     return res.status(200).json(studios); // 200

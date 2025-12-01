@@ -30,8 +30,8 @@ describe("Games GET endpoints", () => {
     const mockGames = [
       {
         _id: gameId,
-        title: "Mock Game",
-        description: "Mock description",
+        title: "Game test",
+        description: "Game description",
         releaseYear: 2024,
         genre: [],
         platforms: [],
@@ -51,15 +51,15 @@ describe("Games GET endpoints", () => {
 
     expect(Array.isArray(res.body)).toBe(true);
 
-    expect(res.body[0]).toHaveProperty("title", "Mock Game");
+    expect(res.body[0]).toHaveProperty("title", "Game test");
   });
 
   //Second test
   test("GET /games/:id should return 200 when id exists", async () => {
     const mockGame = {
       _id: gameId,
-      title: "Mock Game",
-      description: "Mock description",
+      title: "Game test",
+      description: "Game description",
       releaseYear: 2024,
       genre: [],
       platforms: [],
@@ -75,7 +75,7 @@ describe("Games GET endpoints", () => {
 
     expect(res.status).toBe(200);
     expect(res.body).toHaveProperty("_id", gameId);
-    expect(res.body).toHaveProperty("title", "Mock Game");
+    expect(res.body).toHaveProperty("title", "Game test");
   });
 
   test("GET /games/:id should return 400 for invalid id", async () => {
@@ -83,7 +83,10 @@ describe("Games GET endpoints", () => {
 
     expect(res.status).toBe(400);
 
-    expect(res.body).toHaveProperty("message");
+    expect(res.body).toHaveProperty(
+      "message",
+      "Bad Request - validation failed"
+    );
   });
 
   test("GET /games/:id should return 404 for valid but non-existing id", async () => {
@@ -95,7 +98,7 @@ describe("Games GET endpoints", () => {
     const res = await request(app).get(`/games/${validButMissingId}`);
 
     expect(res.status).toBe(404);
-    expect(res.body).toHaveProperty("message");
+    expect(res.body).toHaveProperty("message", "Game not found");
   });
 });
 
@@ -106,8 +109,8 @@ describe("GENRES GET endpoints", () => {
     const mockGenres = [
       {
         _id: genreId,
-        name: "Action",
-        description: "Action games",
+        name: "Genre test",
+        description: "Genre games",
       },
     ];
 
@@ -117,14 +120,14 @@ describe("GENRES GET endpoints", () => {
 
     expect(res.status).toBe(200);
     expect(Array.isArray(res.body)).toBe(true);
-    expect(res.body[0]).toHaveProperty("name", "Action");
+    expect(res.body[0]).toHaveProperty("name", "Genre test");
   });
 
   test("GET /genres/:id should return 200 when id exists", async () => {
     const mockGenre = {
       _id: genreId,
-      name: "Action",
-      description: "Action games",
+      name: "Genre test",
+      description: "Genre games",
     };
 
     mockingoose(Genre).toReturn(mockGenre, "findOne");
@@ -133,14 +136,17 @@ describe("GENRES GET endpoints", () => {
 
     expect(res.status).toBe(200);
     expect(res.body).toHaveProperty("_id", genreId);
-    expect(res.body).toHaveProperty("name", "Action");
+    expect(res.body).toHaveProperty("name", "Genre test");
   });
 
   test("GET /genres/:id should return 400 for invalid id", async () => {
     const res = await request(app).get("/genres/12345");
 
     expect(res.status).toBe(400);
-    expect(res.body).toHaveProperty("message");
+    expect(res.body).toHaveProperty(
+      "message",
+      "Bad Request - validation failed"
+    );
   });
 
   test("GET /genres/:id should return 404 for valid but non-existing id", async () => {
@@ -151,7 +157,7 @@ describe("GENRES GET endpoints", () => {
     const res = await request(app).get(`/genres/${validButMissingId}`);
 
     expect(res.status).toBe(404);
-    expect(res.body).toHaveProperty("message");
+    expect(res.body).toHaveProperty("message", "Genre not found");
   });
 });
 
@@ -162,7 +168,7 @@ describe("PLATFORMS GET endpoints (mockingoose)", () => {
     const mockPlatforms = [
       {
         _id: platformId,
-        name: "PC",
+        name: "Platform test",
         manufacturer: "Generic",
       },
     ];
@@ -173,13 +179,13 @@ describe("PLATFORMS GET endpoints (mockingoose)", () => {
 
     expect(res.status).toBe(200);
     expect(Array.isArray(res.body)).toBe(true);
-    expect(res.body[0]).toHaveProperty("name", "PC");
+    expect(res.body[0]).toHaveProperty("name", "Platform test");
   });
 
   test("GET /platforms/:id should return 200 when id exists", async () => {
     const mockPlatform = {
       _id: platformId,
-      name: "PC",
+      name: "Platform test",
       manufacturer: "Generic",
     };
 
@@ -189,14 +195,17 @@ describe("PLATFORMS GET endpoints (mockingoose)", () => {
 
     expect(res.status).toBe(200);
     expect(res.body).toHaveProperty("_id", platformId);
-    expect(res.body).toHaveProperty("name", "PC");
+    expect(res.body).toHaveProperty("name", "Platform test");
   });
 
   test("GET /platforms/:id should return 400 for invalid id", async () => {
     const res = await request(app).get("/platforms/12345");
 
     expect(res.status).toBe(400);
-    expect(res.body).toHaveProperty("message");
+    expect(res.body).toHaveProperty(
+      "message",
+      "Bad Request - validation failed"
+    );
   });
 
   test("GET /platforms/:id should return 404 for valid but non-existing id", async () => {
@@ -207,7 +216,7 @@ describe("PLATFORMS GET endpoints (mockingoose)", () => {
     const res = await request(app).get(`/platforms/${validButMissingId}`);
 
     expect(res.status).toBe(404);
-    expect(res.body).toHaveProperty("message");
+    expect(res.body).toHaveProperty("message", "platform not found");
   });
 });
 
@@ -218,7 +227,7 @@ describe("STUDIOS GET endpoints (mockingoose)", () => {
     const mockStudios = [
       {
         _id: studioId,
-        name: "Mock Studio",
+        name: "Studio test",
         country: "USA",
       },
     ];
@@ -229,13 +238,13 @@ describe("STUDIOS GET endpoints (mockingoose)", () => {
 
     expect(res.status).toBe(200);
     expect(Array.isArray(res.body)).toBe(true);
-    expect(res.body[0]).toHaveProperty("name", "Mock Studio");
+    expect(res.body[0]).toHaveProperty("name", "Studio test");
   });
 
   test("GET /studios/:id should return 200 when id exists", async () => {
     const mockStudio = {
       _id: studioId,
-      name: "Mock Studio",
+      name: "Studio test",
       country: "USA",
     };
 
@@ -245,14 +254,17 @@ describe("STUDIOS GET endpoints (mockingoose)", () => {
 
     expect(res.status).toBe(200);
     expect(res.body).toHaveProperty("_id", studioId);
-    expect(res.body).toHaveProperty("name", "Mock Studio");
+    expect(res.body).toHaveProperty("name", "Studio test");
   });
 
   test("GET /studios/:id should return 400 for invalid id", async () => {
     const res = await request(app).get("/studios/12345");
 
     expect(res.status).toBe(400);
-    expect(res.body).toHaveProperty("message");
+    expect(res.body).toHaveProperty(
+      "message",
+      "Bad Request - validation failed"
+    );
   });
 
   test("GET /studios/:id should return 404 for valid but non-existing id", async () => {
@@ -263,6 +275,6 @@ describe("STUDIOS GET endpoints (mockingoose)", () => {
     const res = await request(app).get(`/studios/${validButMissingId}`);
 
     expect(res.status).toBe(404);
-    expect(res.body).toHaveProperty("message");
+    expect(res.body).toHaveProperty("message", "Studio not found");
   });
 });
