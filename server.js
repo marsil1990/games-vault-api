@@ -81,7 +81,7 @@ app.use((req, res, next) => {
 });
 
 //Detect Errors didn't cath for try catch
-process.on("uncaughtExceptiob", (err, origib) => {
+process.on("uncaughtException", (err, origin) => {
   console.log(
     process.stderr.fd,
     `Caught exception: ${err}\n` + `Exception origin: ${origin}`
