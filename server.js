@@ -119,27 +119,31 @@ app.use((req, res, next) => {
 });
 
 //Detect Errors didn't cath for try catch
-process.on("uncaughtExceptiob", (err, origib) => {
-  console.log(
-    process.stderr.fd,
-    `Caught exception: ${err}\n` + `Exception origin: ${origin}`
-  );
+// Catch uncaught exceptions properly
+process.on("uncaughtException", (err, origin) => {
+  console.error(`Caught exception: ${err}\nException origin: ${origin}`);
 });
 
 if (process.env.NODE_ENV !== "test") {
-  mongoose
-    .connect(process.env.MONGODB_URL)
-    .then(() => {
-      app.listen(process.env.PORT || 3000, () => {
-        console.log(
-          "Database is listening and node Running at port " +
-            (process.env.PORT || 3000)
-        );
+  // Only connect and start the server when not running tests
+  if (process.env.NODE_ENV !== "test") {
+    mongoose
+      .connect(process.env.MONGODB_URL)
+      .then(() => {
+        const port = process.env.PORT || 3000;
+        app.listen(port, () => {
+          console.log("Database is listening and node Running at port " + port);
+        });
+      })
+      .catch((err) => {
+        console.error("Error connecting Mongoose", err);
       });
-    })
-    .catch((err) => {
-      console.log("Error conecting Mongoose", err);
-    });
+  } else {
+    // In test environment, export app without starting server
+    mongoose.Promise = global.Promise;
+  }
+
+  module.exports = app;
 }
 
 module.exports = app;

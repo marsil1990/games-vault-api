@@ -6,7 +6,8 @@
   "scripts": {
     "test": "cross-env NODE_ENV=test jest --detectOpenHandles --forceExit",
     "start": "nodemon server.js",
-    "start-prod": "node server.js"
+    "start-prod": "node server.js",
+    "gen-swagger": "node swagger.js"
   },
   "repository": {
     "type": "git",
