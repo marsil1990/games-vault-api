@@ -98,7 +98,7 @@ describe("Games GET endpoints", () => {
     const res = await request(app).get(`/games/${validButMissingId}`);
 
     expect(res.status).toBe(404);
-    expect(res.body).toHaveProperty("message", "Game not found");
+    expect(res.body).toHaveProperty("message", "Item not found in games");
   });
 });
 
@@ -157,7 +157,7 @@ describe("GENRES GET endpoints", () => {
     const res = await request(app).get(`/genres/${validButMissingId}`);
 
     expect(res.status).toBe(404);
-    expect(res.body).toHaveProperty("message", "Genre not found");
+    expect(res.body).toHaveProperty("message", "Item not found in genres");
   });
 });
 
@@ -216,7 +216,7 @@ describe("PLATFORMS GET endpoints (mockingoose)", () => {
     const res = await request(app).get(`/platforms/${validButMissingId}`);
 
     expect(res.status).toBe(404);
-    expect(res.body).toHaveProperty("message", "platform not found");
+    expect(res.body).toHaveProperty("message", "Item not found in platforms");
   });
 });
 
@@ -275,6 +275,6 @@ describe("STUDIOS GET endpoints (mockingoose)", () => {
     const res = await request(app).get(`/studios/${validButMissingId}`);
 
     expect(res.status).toBe(404);
-    expect(res.body).toHaveProperty("message", "Studio not found");
+    expect(res.body).toHaveProperty("message", "Item not found in studios");
   });
 });
