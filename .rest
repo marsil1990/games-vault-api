@@ -1,5 +1,5 @@
 // HOSTNAME
-@hostname = https://games-vault-api-x81d.onrender.com/
+@hostname = https://games-vault-api-x81d.onrender.com
 
 ## 🎮 Collection GAMES
 
