@@ -12,8 +12,7 @@ const MongoStore = require("connect-mongo");
 
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://games-vault-api-x81d.onrender.com",
-  "https://games-vault-api-rh12.onrender.com"
+  "https://games-vault-api-x81d.onrender.com"
 ];
 
 app.use(
@@ -26,17 +25,17 @@ app.use(
       }
     },
     credentials: true,
-      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-      allowedHeaders: [
-        "Content-Type",
-        "Authorization",
-        "Accept",
-        "Origin",
-        "Cookie",
-        "connect.sid",
-        "X-Requested-With"
-      ],
-      exposedHeaders: ["Set-Cookie", "set-cookie"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization",
+      "Accept",
+      "Origin",
+      "Cookie",
+      "connect.sid",
+      "X-Requested-With",
+    ],
+    exposedHeaders: ["Set-Cookie", "set-cookie"],
   })
 );
 
@@ -120,23 +119,31 @@ app.use((req, res, next) => {
 });
 
 //Detect Errors didn't cath for try catch
-process.on("uncaughtExceptiob", (err, origib) => {
-  console.log(
-    process.stderr.fd,
-    `Caught exception: ${err}\n` + `Exception origin: ${origin}`
-  );
+// Catch uncaught exceptions properly
+process.on("uncaughtException", (err, origin) => {
+  console.error(`Caught exception: ${err}\nException origin: ${origin}`);
 });
 
-mongoose
-  .connect(process.env.MONGODB_URL)
-  .then(() => {
-    app.listen(process.env.PORT || 3000, () => {
-      console.log(
-        "Database is listening and node Running at port " +
-          (process.env.PORT || 3000)
-      );
-    });
-  })
-  .catch((err) => {
-    console.log("Error conecting Mongoose", err);
-  });
+if (process.env.NODE_ENV !== "test") {
+  // Only connect and start the server when not running tests
+  if (process.env.NODE_ENV !== "test") {
+    mongoose
+      .connect(process.env.MONGODB_URL)
+      .then(() => {
+        const port = process.env.PORT || 3000;
+        app.listen(port, () => {
+          console.log("Database is listening and node Running at port " + port);
+        });
+      })
+      .catch((err) => {
+        console.error("Error connecting Mongoose", err);
+      });
+  } else {
+    // In test environment, export app without starting server
+    mongoose.Promise = global.Promise;
+  }
+
+  module.exports = app;
+}
+
+module.exports = app;
