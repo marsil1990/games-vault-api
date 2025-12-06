@@ -5,10 +5,10 @@
     "description": "This API allow us to get, create, update and delete Games, genrer, plataform and others",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": "games-vault-api-rh12.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "securityDefinitions": {
     "cookieAuth": {

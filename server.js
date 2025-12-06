@@ -12,7 +12,7 @@ const MongoStore = require("connect-mongo");
 
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://games-vault-api-x81d.onrender.com",
+  "https://games-vault-api-x81d.onrender.com"
 ];
 
 app.use(
