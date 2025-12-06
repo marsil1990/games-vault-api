@@ -1,4 +1,4 @@
-const Studio = require("../models/Studio");
+const Studio = require("../../models/Studio");
 const mongoose = require("mongoose");
 const { Types } = mongoose;
 

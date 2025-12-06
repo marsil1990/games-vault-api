@@ -3,13 +3,15 @@ const requireAuth = require("../middleware/authentication");
 
 const validateRequest = require("../middleware/validate");
 const { saveStudioRules, studio_id } = require("../middleware/rules");
-const studioController = require("../controllers/studioController");
+// const studioController = require("../controllers/studioController");
+const studioController = require('../controllers/generalController');
+const collection = "studios";
 
 // GET /studios
-routes.get("/", studioController.getAll);
+routes.get("/", studioController.getAll(collection));
 
 // GET /studios/:id
-routes.get("/:id", studio_id, validateRequest, studioController.getSingle);
+routes.get("/:id", studio_id, validateRequest, studioController.getSingle(collection));
 
 // POST /studios
 routes.post(
@@ -18,7 +20,7 @@ routes.post(
   /* #swagger.security= [{"cookieAuth": []}] */
   saveStudioRules,
   validateRequest,
-  studioController.create
+  studioController.create(collection)
 );
 
 // PUT /studios/:id
@@ -29,7 +31,7 @@ routes.put(
   studio_id,
   saveStudioRules,
   validateRequest,
-  studioController.updateByid
+  studioController.updateByid(collection)
 );
 
 // DELETE /studios/:id
@@ -39,7 +41,7 @@ routes.delete(
   /* #swagger.security= [{"cookieAuth": []}] */
   studio_id,
   validateRequest,
-  studioController.deleteByid
+  studioController.deleteByid(collection)
 );
 
 module.exports = routes;

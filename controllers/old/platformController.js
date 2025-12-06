@@ -1,4 +1,4 @@
-const Platform = require("../models/Platform");
+const Platform = require("../../models/Platform");
 const mongoose = require("mongoose");
 const { Types } = require("mongoose");
 
