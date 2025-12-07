@@ -3,7 +3,6 @@ const requireAuth = require("../middleware/authentication");
 
 const validateRequest = require("../middleware/validate");
 const { saveGenreRules, genre_id } = require("../middleware/rules");
-// const genreController = require("../controllers/genreController");
 const genreController = require('../controllers/generalController');
 const collection = "genres";
 
