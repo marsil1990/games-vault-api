@@ -3,7 +3,6 @@ const requireAuth = require("../middleware/authentication");
 
 const validateRequest = require("../middleware/validate");
 const { savePlatformRules, platform_id } = require("../middleware/rules");
-// const platformController = require("../controllers/platformController");
 const platformController = require('../controllers/generalController');
 const collection = "platforms";
 

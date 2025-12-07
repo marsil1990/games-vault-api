@@ -3,7 +3,6 @@ const requireAuth = require("../middleware/authentication");
 
 const validateRequest = require("../middleware/validate");
 const { saveStudioRules, studio_id } = require("../middleware/rules");
-// const studioController = require("../controllers/studioController");
 const studioController = require('../controllers/generalController');
 const collection = "studios";
 
